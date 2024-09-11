@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'gold_auth',
 ]
 
 MIDDLEWARE = [
@@ -73,10 +74,20 @@ WSGI_APPLICATION = 'auth_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',  # MariaDB는 mysql 엔진을 사용합니다.
+        'NAME': 'auth_db',                     # 생성한 데이터베이스 이름
+        'USER': 'auth_user',                   # 생성한 사용자 이름
+        'PASSWORD': 'wjd456',           # 사용자의 비밀번호
+        'HOST': '127.0.0.1',                   # 로컬 호스트 (MariaDB가 로컬에 있을 경우)
+        'PORT': '3307',                        # 변경한 MariaDB 포트
     }
 }
 
