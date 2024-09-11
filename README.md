@@ -1,4 +1,61 @@
+# 금방주식회사 백엔드 입사과제<br/>
+<br/>
+## Quick Start<br/>
+<br/>
+### 환경 설정<br/>
+<br/>
+1. 프로젝트 클론<br/>
+```bash
+   git clone https://github.com/your-username/wanted_gold.git
+   cd wanted_gold
+```
+<br/>
+2. 가상 환경 생성 및 활성화<br/>
+<br/>
+# 가상 환경 생성 (윈도우)<br/>
+python -m venv venv<br/>
+<br/>
+# 가상 환경 활성화 (윈도우)<br/>
+venv\Scripts\activate<br/>
+<br/>
+3. 프로젝트 의존성 설치<br/>
+<br/>
+```
+bash
+pip install -r requirements.txt
+```
+<br/>
+4. .env 파일 설정<br/>
+<br/>
+프로젝트 루트 디렉토리에 .env 파일을 생성합니다.<br/>
+<br/>
+5. 데이터베이스 설정<br/>
+HeidiSQL로 MariaDB에 접속하여 auth_db 및 resource_db를 생성합니다.<br/>
+<br/>
+6. Django 데이터베이스 마이그레이션<br/>
+<br/>
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+<br/>
+7. 서버 실행<br/>
+3.1 Django 서버 실행 (auth_server 및 resource_server)<br/>
+```
+auth_server에서
+python manage.py runserver 8888
+```
+resource_server에서
+python manage.py runserver 9999
 
+```
+<br/>
+8. gRPC 서버 실행 (auth_server)(미구현)<br/>
+```
+bash
+auth_server 디렉토리에서 gRPC 서버 실행
+python grpc_server.py
+```
 
 ## API 요청 설명<br/>
 ### 주문 목록 조회<br/>
