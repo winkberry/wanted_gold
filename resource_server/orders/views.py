@@ -9,14 +9,18 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
-    @action(detail=True, methods=['post'])
-    def update_status(self, request, pk=None):
+    # PUT 요청으로 주문 상태 업데이트
+    def update(self, request, pk=None):
         order = self.get_object()
         new_status = request.data.get('status')
+
+        # 상태값이 유효한지 확인 (Order 모델의 ORDER_STATUS_CHOICES 사용)
         if new_status in dict(Order.ORDER_STATUS_CHOICES):
             order.status = new_status
             order.save()
-            return Response({'status': 'status updated'}, status=status.HTTP_200_OK)
+            serializer = OrderSerializer(order)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
         return Response({'error': 'Invalid status'}, status=status.HTTP_400_BAD_REQUEST)
-    
-    
+
+

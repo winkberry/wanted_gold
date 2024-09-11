@@ -13,7 +13,7 @@ class Order(models.Model):
         ('RECEIVED', '수령 완료'),
     ]
     
-    order_number = models.CharField(max_length=20, unique=True)  # 주문 번호 (자동 생성)
+    order_number = models.CharField(max_length=20, unique=True, blank=True)  # 주문 번호 (자동 생성)
     order_date = models.DateTimeField(auto_now_add=True)  # 주문 일자
     customer_name = models.CharField(max_length=100)  # 주문자
     status = models.CharField(max_length=20, choices=ORDER_STATUS_CHOICES, default='ORDER_COMPLETE')  # 주문 상태
@@ -27,7 +27,11 @@ class Order(models.Model):
         return f'{self.order_number} ({self.customer_name})'
 
     def save(self, *args, **kwargs):
-        # 주문 번호 자동 생성 로직
+        # 주문 번호 자동 생성 로직 (주문 번호가 없을 경우에만 생성)
         if not self.order_number:
+            # 객체가 처음 저장될 때 id가 없으므로 super().save()로 먼저 저장한 후 id를 사용
+            super().save(*args, **kwargs)
             self.order_number = f"ORD-{self.order_date.strftime('%Y%m%d')}-{self.id:06d}"
-        super().save(*args, **kwargs)
+            self.save(update_fields=['order_number'])
+        else:
+            super().save(*args, **kwargs)
