@@ -92,7 +92,7 @@ DATABASES = {
         'USER': os.getenv('DB_USER'),  # .env에서 DB_USER 읽기
         'PASSWORD': os.getenv('DB_PASSWORD'),  # .env에서 DB_PASSWORD 읽기
         'HOST': os.getenv('DB_HOST', '127.0.0.1'),  # .env에서 DB_HOST 읽기, 기본값 '127.0.0.1'
-        'PORT': os.getenv('DB_PORT', '3306'),  # .env에서 DB_PORT 읽기, 기본값 '3306'
+        'PORT': os.getenv('DB_PORT', '3307'),  # .env에서 DB_PORT 읽기, 기본값 '3306'
     }
 }
 
