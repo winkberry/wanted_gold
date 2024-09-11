@@ -29,6 +29,12 @@ python manage.py migrate<br/>
 7. 서버 실행<br/>
 3.1 Django 서버 실행 (auth_server 및 resource_server)<br/>
 <br/>
+- 터미널에서 포트 지정<br/>
+**auth_server**에서 8888번 포트로 실행:<br/>
+python manage.py runserver 8888<br/>
+**resource_server**에서 9999번 포트로 실행:<br/>
+python manage.py runserver 9999<br/>
+<br/>
 auth_server에서<br/>
 python manage.py runserver 8888<br/>
 <br/>
