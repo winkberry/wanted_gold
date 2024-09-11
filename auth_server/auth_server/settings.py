@@ -9,8 +9,12 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
+from dotenv import load_dotenv
 from pathlib import Path
+
+# .env 파일을 현재 파일의 부모 디렉토리에서 자동으로 로드
+load_dotenv()  # 별도의 경로 설정 없이 .env 파일을 로드합니다.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,14 +84,15 @@ WSGI_APPLICATION = 'auth_server.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# 데이터베이스 설정
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # MariaDB는 mysql 엔진을 사용합니다.
-        'NAME': 'auth_db',                     # 생성한 데이터베이스 이름
-        'USER': 'auth_user',                   # 생성한 사용자 이름
-        'PASSWORD': 'wjd456',           # 사용자의 비밀번호
-        'HOST': '127.0.0.1',                   # 로컬 호스트 (MariaDB가 로컬에 있을 경우)
-        'PORT': '3307',                        # 변경한 MariaDB 포트
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME'),  # .env에서 DB_NAME 읽기
+        'USER': os.getenv('DB_USER'),  # .env에서 DB_USER 읽기
+        'PASSWORD': os.getenv('DB_PASSWORD'),  # .env에서 DB_PASSWORD 읽기
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),  # .env에서 DB_HOST 읽기, 기본값 '127.0.0.1'
+        'PORT': os.getenv('DB_PORT', '3306'),  # .env에서 DB_PORT 읽기, 기본값 '3306'
     }
 }
 
