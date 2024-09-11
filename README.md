@@ -14,11 +14,6 @@ python -m venv venv<br/>
 # 가상 환경 활성화 (윈도우)<br/>
 venv\Scripts\activate<br/>
 <br/>
-3. 프로젝트 의존성 설치<br/>
-<br/>
-bash<br/>
-pip install -r requirements.txt<br/>
-<br/>
 4. .env 파일 설정<br/>
 <br/>
 프로젝트 루트 디렉토리에 .env 파일을 생성합니다.<br/>
