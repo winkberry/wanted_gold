@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# .env 파일을 로드
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,10 +79,20 @@ WSGI_APPLICATION = 'resource_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('RESOURCE_DB_NAME'),  # resource_db 이름
+        'USER': os.getenv('RESOURCE_DB_USER'),    # 사용자 이름
+        'PASSWORD': os.getenv('RESOURCE_DB_PASSWORD'),  # 비밀번호
+        'HOST': os.getenv('RESOURCE_DB_HOST', '127.0.0.1'),    # 로컬 호스트
+        'PORT': os.getenv('RESOURCE_DB_PORT', '3307'),         # 포트
     }
 }
 
